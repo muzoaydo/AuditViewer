@@ -12,7 +12,7 @@ namespace AuditViewer.AuditLogActions
     {
         Task<List<AuditLogAction>> GetListByIdAsync(GetAuditLogActionListDto input);
         
-        Task GetCountAsync(GetAuditLogActionListDto input);
+        Task<long> GetCountAsync(GetAuditLogActionListDto input);
         
     }
 }
