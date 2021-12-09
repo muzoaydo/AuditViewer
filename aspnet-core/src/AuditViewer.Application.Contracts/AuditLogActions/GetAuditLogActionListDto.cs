@@ -1,7 +1,4 @@
-﻿using Abp.EntityHistory;
-using AuditViewer.AuditLogActions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Volo.Abp.Application.Dtos;
 
 namespace AuditViewer.AuditLogActions

@@ -1,9 +1,10 @@
 ﻿using System.IO;
+using AuditViewer.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Acme.AuditViewer.EntityFrameworkCore
+namespace AuditViewer.EntityFrameworkCore
 {
     /* This class is needed for EF Core console commands
      * (like Add-Migration and Update-Database commands) */
@@ -24,7 +25,7 @@ namespace Acme.AuditViewer.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Acme.AuditViewer.DbMigrator/"))
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../AuditViewer.DbMigrator/"))
                 .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();

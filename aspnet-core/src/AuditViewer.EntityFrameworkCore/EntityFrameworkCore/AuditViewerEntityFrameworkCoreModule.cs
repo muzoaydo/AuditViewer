@@ -14,7 +14,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using AuditViewer;
 using AuditViewer.EntityFrameworkCore;
 
-namespace Acme.AuditViewer.EntityFrameworkCore
+namespace AuditViewer.EntityFrameworkCore
 {
     [DependsOn(
         typeof(AuditViewerDomainModule),

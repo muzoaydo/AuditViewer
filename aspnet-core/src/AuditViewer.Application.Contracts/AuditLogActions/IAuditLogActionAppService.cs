@@ -10,7 +10,7 @@ namespace AuditViewer.AuditLogs
         IReadOnlyAppService< //Defines CRUD methods
             AuditLogActionDto, //Used to show books
             Guid, //Primary key of the audit entity
-            PagedAndSortedResultRequestDto //Used for paging/sorting
+            PagedAndSortedResultRequestDto//Used for paging/sorting
             > //Used to create/update a book
     {
         Task<PagedResultDto<AuditLogActionDto>> GetListByIdAsync(GetAuditLogActionListDto input);

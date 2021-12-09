@@ -1,10 +1,11 @@
-﻿using Nancy.Json;
+﻿using AuditViewer.AuditLogs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AuditLogging;
+using Nancy.Json;
 
 namespace AuditViewer.AuditLogActions
 {
@@ -16,12 +17,12 @@ namespace AuditViewer.AuditLogActions
             PagedAndSortedResultRequestDto>, //Used for paging/sorting
         IAuditLogActionAppService //implement the IBookAppService
     {
-        private readonly IAuditLogActionRepository _auditLogActionrepository;
+        private readonly IAuditLogActionRepository _auditLogActionRepository;
 
         public AuditLogActionAppService(IAuditLogActionRepository auditLogActionrepository)
             : base(auditLogActionrepository)
         {
-            _auditLogActionrepository = auditLogActionrepository;
+            _auditLogActionRepository = auditLogActionrepository;
         }
 
         public async Task<PagedResultDto<AuditLogActionDto>> GetListByIdAsync(GetAuditLogActionListDto input)
@@ -31,9 +32,9 @@ namespace AuditViewer.AuditLogActions
                 input.Sorting = "id";
             }
 
-            var totalCount = await _auditLogActionrepository.GetCountAsync(input);
+            var totalCount = await _auditLogActionRepository.GetCountAsync(input);
 
-            var auditLogActions = await _auditLogActionrepository.GetListByIdAsync(input);
+            var auditLogActions = await _auditLogActionRepository.GetListByIdAsync(input);
             var mappedList = ObjectMapper.Map<List<AuditLogAction>, List<AuditLogActionDto>>(auditLogActions);
             foreach (var item in mappedList)
             {

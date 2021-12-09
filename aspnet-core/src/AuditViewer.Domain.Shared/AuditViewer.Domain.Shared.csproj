@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Localization\AuditViewer\*.json" />
-    <Content Remove="Localization\AuditViewer\*.json" />
   </ItemGroup>
 
   <ItemGroup>
