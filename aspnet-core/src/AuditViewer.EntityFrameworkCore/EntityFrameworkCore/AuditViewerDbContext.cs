@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Volo.Abp.AuditLogging;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -13,7 +14,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-namespace AuditViewer.EntityFrameworkCore
+namespace Acme.AuditViewer.EntityFrameworkCore
 {
     [ReplaceDbContext(typeof(IIdentityDbContext))]
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
@@ -51,7 +52,10 @@ namespace AuditViewer.EntityFrameworkCore
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
         #endregion
+        //public DbSet<AuditLogAction> AuditLogActions { get; set; }
+        //public DbSet<AuditLog> AuditLog { get; set; }
         
+        //public DbSet<AuditLog> AuditLogFilter { get; set; }
         public AuditViewerDbContext(DbContextOptions<AuditViewerDbContext> options)
             : base(options)
         {
