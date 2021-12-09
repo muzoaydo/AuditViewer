@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AuditViewer.Data;
 using Volo.Abp.DependencyInjection;
 
-namespace AuditViewer.EntityFrameworkCore
+namespace Acme.AuditViewer.EntityFrameworkCore
 {
     public class EntityFrameworkCoreAuditViewerDbSchemaMigrator
         : IAuditViewerDbSchemaMigrator, ITransientDependency
