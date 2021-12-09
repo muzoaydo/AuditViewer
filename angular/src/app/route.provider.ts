@@ -15,6 +15,20 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/AuditViewer',
+        name: '::Menu:AuditViewer',
+        iconClass: 'fas fa-align-justify',
+        order: 2,
+        layout: eLayoutType.application
+      },
+      {
+        path: '/auditlogs',
+        name: '::Menu:AuditLogs',
+        iconClass: 'fas fa-align-justify',
+        parentName: '::Menu:AuditViewer',
+        layout: eLayoutType.application
+      }
     ]);
   };
 }
