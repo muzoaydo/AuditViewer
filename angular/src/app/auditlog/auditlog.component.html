@@ -1,3 +1,47 @@
-<p>auditlog works!</p>
-<app-audit-log-actions></app-audit-log-actions>
-<app-details></app-details>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ '::Menu:AuditLogs' | abpLocalization }}
+        </h5>
+      </div>
+      <div class="text-right col col-md-6"></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ngx-datatable [rows]="auditLogs.items" [count]="auditLogs.totalCount" [list]="list" default>
+      <ngx-datatable-column  [name]="'HTTP Request'" prop="line.prop" [width]="200">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.httpStatusCode }} {{ row.httpMethod}} {{ row.url }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column *ngFor="let line of auditArr" [name]="line.name | abpLocalization" prop="line.prop" [width]="line.width">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div style="white-space: pre-wrap;" *ngIf="line.label == 'Execution Time'">
+            {{ row[line.value] | date: "mm-dd-yyyy" }}
+            {{ row[line.value] | date: "HH:mm:ss" }}
+          </div>
+          <div *ngIf="line.label != ('Execution Time' || 'httpStatusCode' || 'httpMethod')">
+            {{ row[line.value] || '-'}}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column  [name]="'Exception'" prop="line.prop" [width]="10">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-raised-button color="warn">Warn</button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column  [name]="'Actions'" prop="line.prop" [width]="10">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button class="fas fa-question"></button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column  [name]="'Details'" prop="line.prop" [width]="10">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button class="fas fa-align-justify"></button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
