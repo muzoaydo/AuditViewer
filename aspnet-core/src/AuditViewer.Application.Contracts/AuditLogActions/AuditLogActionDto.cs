@@ -4,7 +4,7 @@ using Volo.Abp.Data;
 
 namespace AuditViewer.AuditLogActions
 {
-    public class AuditLogActionDto : EntityDto<Guid>
+    public class AuditLogActionDto : AuditedEntityDto<Guid>
     {
         public Guid? TenantId { get; protected set; }
 

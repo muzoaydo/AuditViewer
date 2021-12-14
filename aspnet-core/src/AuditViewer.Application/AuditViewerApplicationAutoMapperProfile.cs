@@ -15,6 +15,7 @@ namespace AuditViewer
             CreateMap<AuditLog, AuditLogDto>();
             CreateMap<AuditLogDto, AuditLog>();
             CreateMap<AuditLogAction, AuditLogActionDto>();
+            CreateMap<AuditLogActionDto, AuditLogAction>();
         }
     }
 }

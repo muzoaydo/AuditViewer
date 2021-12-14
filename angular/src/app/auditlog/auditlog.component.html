@@ -34,7 +34,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column  [name]="'Actions'" prop="line.prop" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <button style="color: white; background-color: purple;" mat-raised-button class="fas fa-sitemap" (click)="actions()"></button>
+          <button style="color: white; background-color: purple;" mat-raised-button class="fas fa-sitemap" (click)="actions(row.id)"></button>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column  [name]="'Details'" prop="line.prop" [width]="10">
@@ -62,12 +62,12 @@
   </ng-template>
 </abp-modal>
 
-<abp-modal [(visible)]="isActionsOpen">
+<abp-modal  [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
     <h3>{{ '::AuditActions' | abpLocalization }}</h3>
   </ng-template>
 
-  <ng-template #abpBody> </ng-template>
+  <ng-template #abpBody> <app-audit-log-actions [selectedLogId] = "selectedLogId"></app-audit-log-actions> </ng-template>
 
   <ng-template #abpFooter>
     <button type="button" class="btn btn-secondary" abpClose>

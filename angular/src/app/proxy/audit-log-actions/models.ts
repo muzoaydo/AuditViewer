@@ -1,6 +1,6 @@
-import type { EntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
+import type { AuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 
-export interface AuditLogActionDto extends EntityDto<string> {
+export interface AuditLogActionDto extends AuditedEntityDto<string> {
   tenantId?: string;
   auditLogId?: string;
   serviceName?: string;
@@ -13,5 +13,5 @@ export interface AuditLogActionDto extends EntityDto<string> {
 }
 
 export interface GetAuditLogActionListDto extends PagedAndSortedResultRequestDto {
-  auditLogId?: string;
+  selectedLogId?: string;
 }

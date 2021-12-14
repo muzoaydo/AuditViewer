@@ -5,6 +5,6 @@ namespace AuditViewer.AuditLogActions
 {
     public class GetAuditLogActionListDto : PagedAndSortedResultRequestDto
     {
-        public Guid AuditLogId { get; set; }
+        public Guid selectedLogId { get; set; }
     }
 }

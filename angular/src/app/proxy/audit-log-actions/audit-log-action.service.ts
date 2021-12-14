@@ -28,7 +28,7 @@ export class AuditLogActionService {
     this.restService.request<any, PagedResultDto<AuditLogActionDto>>({
       method: 'GET',
       url: '/api/app/audit-log-action/by-id',
-      params: { auditLogId: input.auditLogId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { selectedLogId: input.selectedLogId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
 

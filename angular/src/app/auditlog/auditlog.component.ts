@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuditLogDto, AuditLogService } from '@proxy/audit-logs';
+import { GetAuditLogActionListDto } from '@proxy/audit-log-actions';
 
 @Component({
   selector: 'app-auditlog',
@@ -15,7 +16,8 @@ export class AuditlogComponent implements OnInit {
   isExceptionsOpen = false;
   isDetailsOpen = false;
   isActionsOpen = false;
-  selectedException = ""
+  selectedException = "";
+  selectedLogId : string;
 
 
 
@@ -39,7 +41,7 @@ export class AuditlogComponent implements OnInit {
         let item = this.auditLogs.items[i];
         if (item["exceptions"]) {
           item["exceptions"] = JSON.stringify(JSON.parse(item["exceptions"]), null, 2).replace(/(\\r\\n|\r|\n)/gm, '');
-          debugger
+          
         }
       }
     }
@@ -58,8 +60,11 @@ export class AuditlogComponent implements OnInit {
     this.isDetailsOpen = true;
   }
 
-  actions() {
+  actions(logId:string) {
     this.isActionsOpen = true;
+    this.selectedLogId = logId;
+    
+
   }
 
 }

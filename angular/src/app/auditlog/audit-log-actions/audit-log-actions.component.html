@@ -1,1 +1,27 @@
-<p>audit-log-actions works!</p>
+<div class="card">
+    <div style="color: white; background-color: purple;" class="card-header">
+      <div class="row">
+        <div class="col col-md-6">
+          <h5 class="card-title">
+            {{ '::Menu:AuditLogs' | abpLocalization }}
+          </h5>
+        </div>
+        <div class="text-right col col-md-6"></div>
+      </div>
+    </div>
+    <div  class="card-body">
+      <ngx-datatable  [rows]="auditLogActions.items" [count]="auditLogActions.totalCount" [list]="list" default>
+        <ngx-datatable-column *ngFor="let line of actionsArr" [name]="line.name | abpLocalization" prop="line.prop" [width]="line.width">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div style="white-space: pre-wrap;" *ngIf="line.label == 'Execution Time'">
+              {{ row[line.value] | date: "mm-dd-yyyy" }}
+              {{ row[line.value] | date: "HH:mm:ss" }}
+            </div>
+            <div *ngIf="line.label != ('Execution Time' || 'httpStatusCode' || 'httpMethod')">
+              {{ row[line.value] || '-'}}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
