@@ -1,1 +1,20 @@
-<p>details works!</p>
+<!-- <div style="color: white; background-color: purple;" class="card-header">
+    <div class="row">
+        <div class="col col-md-6">
+            <h5 class="card-title">
+                {{ '::Menu:Details' | abpLocalization }}
+            </h5>
+        </div>
+        <div class="text-right col col-md-6"></div>
+    </div>
+</div> -->
+
+<div *ngFor="let line of detailsArr">
+    <div style="font-weight: 700; font-size: medium; color: purple;">
+        {{ line.label }}:
+    </div>
+    <div style="color: black; font-weight: 400; margin-bottom:-5">
+        {{ selectedLog[line.value] || "-"}}
+    </div>
+    <hr>
+</div>

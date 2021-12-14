@@ -18,6 +18,7 @@ export class AuditlogComponent implements OnInit {
   isActionsOpen = false;
   selectedException = "";
   selectedLogId : string;
+  selectedLog: object;
 
 
 
@@ -56,8 +57,10 @@ export class AuditlogComponent implements OnInit {
 
   }
 
-  details() {
+  details(row) {
     this.isDetailsOpen = true;
+    this.selectedLog = row;
+    debugger
   }
 
   actions(logId:string) {

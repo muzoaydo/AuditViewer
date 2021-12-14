@@ -39,7 +39,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column  [name]="'Details'" prop="line.prop" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-info" (click)="details()"></button>
+          <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-info" (click)="details(row)"></button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
@@ -48,7 +48,7 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isExceptionsOpen">
   <ng-template #abpHeader>
-    <h3>{{ '::Exceptions' | abpLocalization }}</h3>
+    <div style="color: purple;margin-left: 5px;" class="fas fa-exclamation fa-2x"></div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -64,7 +64,7 @@
 
 <abp-modal [options]="{size: 'xl'}"  [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
-    <div style="color: purple;" class="fas fa-tree fa-2x"></div>
+    <div style="color: purple;margin-left: 5px;" class="fas fa-tree fa-2x"></div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -80,10 +80,10 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isDetailsOpen">
   <ng-template #abpHeader>
-    <h3>{{ '::Details' | abpLocalization }}</h3>
+    <div style="color: purple; margin-left: 5px;" class="fas fa-info fa-2x"></div>
   </ng-template>
 
-  <ng-template #abpBody> </ng-template>
+  <ng-template #abpBody><app-details [selectedLog]="selectedLog"></app-details></ng-template>
 
   <ng-template #abpFooter>
     <button type="button" class="btn btn-secondary" abpClose>
