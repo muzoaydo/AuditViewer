@@ -34,9 +34,7 @@ namespace AuditViewer.EntityFrameworkCore.AuditLogActions
         {
             var dbSet = await GetDbSetAsync();
             return await dbSet.Where(auditLogAction => auditLogAction.AuditLogId == input.selectedLogId)
-                .OrderBy(input.Sorting)
-                .Skip(input.SkipCount)
-                .Take(input.MaxResultCount)
+                //.OrderBy(input.Sorting)
                 .ToListAsync();
         }
 

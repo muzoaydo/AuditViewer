@@ -62,12 +62,14 @@
   </ng-template>
 </abp-modal>
 
-<abp-modal  [(visible)]="isActionsOpen">
+<abp-modal [options]="{size: 'xl'}"  [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
-    <h3>{{ '::AuditActions' | abpLocalization }}</h3>
+    <div style="color: purple;" class="fas fa-tree fa-2x"></div>
   </ng-template>
 
-  <ng-template #abpBody> <app-audit-log-actions [selectedLogId] = "selectedLogId"></app-audit-log-actions> </ng-template>
+  <ng-template #abpBody>
+    <app-audit-log-actions [selectedLogId] = "selectedLogId"></app-audit-log-actions>
+  </ng-template>
 
   <ng-template #abpFooter>
     <button type="button" class="btn btn-secondary" abpClose>
@@ -76,7 +78,7 @@
   </ng-template>
 </abp-modal>
 
-<abp-modal [(visible)]="isDetailsOpen">
+<abp-modal [options]="{size: 'xl'}" [(visible)]="isDetailsOpen">
   <ng-template #abpHeader>
     <h3>{{ '::Details' | abpLocalization }}</h3>
   </ng-template>
