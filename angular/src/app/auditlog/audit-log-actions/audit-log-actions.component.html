@@ -11,7 +11,7 @@
     </div>
     <div  class="card-body">
       <ngx-datatable [headerHeight]="0"   [rows]="auditLogActions.items" [count]="auditLogActions.totalCount" [list]="list" default>
-        <ngx-datatable-column [sortable]="false">
+        <ngx-datatable-column style="background-color: lightblue;" [sortable]="false">
           <ng-template let-row="row"  ngx-datatable-cell-template>
             <div *ngFor="let line of actionsArr">
             <pre style="font-weight: 700; font-size: medium; color: purple;">{{ line.label }}:<pre style="color: black; font-weight: 400; margin-bottom:0">{{ row[line.value] || "-"}}</pre></pre>

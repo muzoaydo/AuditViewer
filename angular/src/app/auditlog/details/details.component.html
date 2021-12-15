@@ -1,4 +1,4 @@
-<!-- <div style="color: white; background-color: purple;" class="card-header">
+<div style=" color: white; background-color: purple;" class="card-header">
     <div class="row">
         <div class="col col-md-6">
             <h5 class="card-title">
@@ -7,14 +7,22 @@
         </div>
         <div class="text-right col col-md-6"></div>
     </div>
-</div> -->
-
-<div *ngFor="let line of detailsArr">
-    <div style="font-weight: 700; font-size: medium; color: purple;">
-        {{ line.label }}:
+</div>
+<div
+    style="background-color: aliceblue; padding:10px; border: 1px; border-style: solid; border-color: purple; border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;">
+    <div style=" line-height: 1.3; margin-left: 10px;" *ngFor="let line of detailsArr, let i=index">
+        <div style="margin-bottom: 5px;font-weight: 700; font-size: medium; color: purple;">
+            {{i+1}}) {{ line.label }}:
+        </div>
+        <div *ngIf="line.value != 'executionTime'"
+            style="font-size: medium; margin-left: 20px; color: black; font-weight: 500; margin-bottom:0">
+            {{ selectedLog[line.value] || "-"}}
+        </div>
+        <div *ngIf="line.label == 'Execution Time'"
+            style="font-size: medium; margin-left: 20px; color: black; font-weight: 500; margin-bottom:0">
+            {{ selectedLog[line.value] | date }}
+            {{ selectedLog[line.value] | date: "HH:mm:ss" }}
+        </div>
+        <hr *ngIf="i != 23">
     </div>
-    <div style="color: black; font-weight: 400; margin-bottom:-5">
-        {{ selectedLog[line.value] || "-"}}
-    </div>
-    <hr>
 </div>

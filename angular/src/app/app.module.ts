@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { MatButtonModule } from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     AppRoutingModule,
     MatButtonModule,
+    MatFormFieldModule,
     CoreModule.forRoot({
       environment,
       registerLocaleFn: registerLocale(),

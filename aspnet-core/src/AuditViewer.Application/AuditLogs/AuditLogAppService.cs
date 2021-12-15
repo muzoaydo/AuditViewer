@@ -59,6 +59,11 @@ namespace AuditViewer.AuditLogs
             //var totalCount = filter
             //var filteringVar = await _auditLogFilterRepository.CountAsync(filtering());
 
+            if (input.Sorting == null)
+            {
+                input.Sorting = "executionTime";
+            }
+
             var totalCount = await _auditLogFilterRepository.CountAsync(
                 x => (!input.UserName.IsNullOrWhiteSpace() ? x.UserName.Contains(input.UserName) : true)
                 && (!input.ClientIpAddress.IsNullOrWhiteSpace() ? x.ClientIpAddress.Contains(input.ClientIpAddress) : true)
@@ -77,7 +82,7 @@ namespace AuditViewer.AuditLogs
                 && (input.HttpStatusCode.HasValue ? (x.HttpStatusCode == input.HttpStatusCode) : true)
                 && (input.HasExceptions == "YES" ? x.Exceptions != null : true)
                 && (input.HasExceptions == "NO" ? x.Exceptions == null : true))
-                .OrderByDescending(x => x.ExecutionTime)
+                .OrderByDescending(x => input.Sorting)
                 //.ThenBy(input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount)

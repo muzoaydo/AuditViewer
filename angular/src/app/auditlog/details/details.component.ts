@@ -1,3 +1,4 @@
+import { ListService } from '@abp/ng.core';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -26,11 +27,9 @@ export class DetailsComponent implements OnInit {
     { label: "Browser Info", value: "browserInfo", name: "::browserInfo", prop: "browserInfo", width: 30, type: "" },
     { label: "Http Method", value: "httpMethod", name: "::httpMethod", prop: "httpMethod", width: 30, type: "" },
     { label: "Url", value: "url", name: "::url", prop: "url", width: 30, type: "" },
-    // { label: "Exceptions", value: "exceptions", name: "::exceptions", prop: "exceptions", width: 30, type: '' },
     { label: "Comments", value: "comments", name: "::comments", prop: "comments", width: 30 , type: ""},
     { label: "Http Status Code", value: "httpStatusCode", name: "::httpStatusCode", prop: "httpStatusCode", width: 30, type: ""},
     { label: "Entity Changes", value: "entityChanges", name: "::entityChanges", prop: "entityChanges", width: 30, type: "" },
-    { label: "Audit Log Actions", value: "auditLogActions", name: "::auditLogActions", prop: "auditLogActions", width: 30, type: "" },
     { label: "Last Modification Time", value: "lastModificationTime", name: "::lastModificationTime", prop: "lastModificationTime", width: 30, type: "" },
     { label: "Last Modifier Id", value: "lastModifierId", name: "::lastModifierId", prop: "lastModifierId", width: 30, type: "" },
     { label: "Creation Time", value: "creationTime", name: "::creationTime", prop: "creationTime", width: 30, type: "" },
@@ -39,7 +38,7 @@ export class DetailsComponent implements OnInit {
     ]
     
 
-  constructor() { }
+  constructor(public readonly list: ListService) { }
 
   ngOnInit(): void {
 
