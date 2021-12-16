@@ -25,10 +25,10 @@ export class AuditlogComponent implements OnInit {
   // url: string;
   // httpMethod: string;
   // hasException: string;
-  user: string = "abdsf";
+  user: string = "";
   stat: number;
   ip:string;
-  url:string;
+  urlVal:string;
   method:string;
   exc:string;
 
@@ -87,6 +87,11 @@ export class AuditlogComponent implements OnInit {
   clear() {
     debugger;
     this.user = ""
+    this.stat = null
+    this.ip = ""
+    this.urlVal = ""
+    this.method = ""
+    this.exc = ""
   }
 
   filter(userName: string,

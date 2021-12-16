@@ -11,22 +11,23 @@
   </div>
   <div class="card-body">
     <form #myForm>
-      <div style="margin-left:40px">
-        <mat-form-field style="background-color: aliceblue;width: 210px;" class="filter-input" appearance="fill">
-          <mat-label>User Name</mat-label>
-          <input #userName style="border: 1px; border-color: purple;" name="user" matInput [(ngModel)]="user">
-        </mat-form-field>
-        <mat-form-field style="background-color: aliceblue;width: 210px;" class="filter-input" appearance="fill">
+      <div style="margin-left:25px">
+        <mat-form-field style="  width: 320px;" class="filter-input" appearance="fill">
           <mat-label>HTTP Status Code</mat-label>
-          <input matInput #httpStatusCode>
+          <input matInput #httpStatusCode [(ngModel)]="stat" name="stat">
         </mat-form-field>
-        <mat-form-field style="background-color: aliceblue;width: 210px;" class="filter-input" appearance="fill">
+        <mat-form-field style="  width: 345px;" class="filter-input" appearance="fill">
+          <mat-label>User Name</mat-label>
+          <input #userName name="user" matInput [(ngModel)]="user">
+        </mat-form-field>
+        <mat-form-field style="  width: 345px;" class="filter-input" appearance="fill">
           <mat-label>Ip Address</mat-label>
-          <input matInput #clientIpAddress>
+          <input matInput #clientIpAddress [(ngModel)]="ip" name="ip">
         </mat-form-field>
-        <mat-form-field style=" background-color: aliceblue;width: 150px;">
+        <div style="align-self: center;">
+        <mat-form-field style="   width: 155px;">
           <mat-label>HTTP Method</mat-label>
-          <mat-select #httpMethod>
+          <mat-select disableOptionCentering #httpMethod [(ngModel)]="method" name="method">
             <mat-option value="GET">GET</mat-option>
             <mat-option value="POST">POST</mat-option>
             <mat-option value="PUT">PUT</mat-option>
@@ -35,23 +36,22 @@
             <mat-option value="ANY">ANY</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field style="width: 150px; margin-left:10px">
+        <mat-form-field style="width: 155px; margin-left:10px; margin-right: 10px;">
           <mat-label>Has Exception ?</mat-label>
-          <mat-select #hasExceptions>
+          <mat-select #hasExceptions [(ngModel)]="exc" name="exc">
             <mat-option value="YES">Yes</mat-option>
             <mat-option value="NO">No</mat-option>
             <mat-option value="ANY">Any</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="example-form-field" appearance="fill">
-          <mat-label>Clearable input</mat-label>
-          <input matInput type="text" [(ngModel)]="user">
-        </mat-form-field>
-        <div style="align-self: center;">
-          <mat-form-field style="background-color: aliceblue;width: 500px;" class="filter-input" appearance="fill">
-            <input #url matInput placeholder="URL">
+        
+          <mat-form-field style="width: 700px;" class="filter-input" appearance="fill">
+            <mat-label>URL</mat-label>
+            <input #url matInput [(ngModel)]="urlVal" name="urlVal">
           </mat-form-field>
-          <button mat-raised-button style="margin-right: 10px; background-color: purple; color: white; width: 225px;" (click)="filter(
+        </div>
+        <div>
+          <button mat-raised-button style="margin-right: 30px; background-color: purple; color: white; width: 500px;" (click)="filter(
                                                                                                   userName.value,
                                                                                                   httpStatusCode.value,
                                                                                                   clientIpAddress.value,
@@ -59,7 +59,7 @@
                                                                                                   httpMethod.value,
                                                                                                   hasExceptions.value)"
           >Filter</button>
-          <button mat-raised-button style="background-color: purple; color: white; width: 225px; " (click)="clear()" >Clear</button>
+          <button mat-raised-button style="background-color: purple; color: white; width: 500px; " (click)="clear()" >Clear</button>
         </div>
       </div>
     </form>
@@ -137,7 +137,7 @@
         </div>
     </div>
     <div
-        style="background-color: aliceblue; padding:10px; border: 1px; border-style: solid; border-color: purple; border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;">
+        style="background-color: #efefef; padding:10px; border: 1px; border-style: solid; border-color: purple; border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;">
             <div style="margin-bottom: 5px;font-weight: 500; font-size: medium; color: black;">
               {{ selectedException }}
         </div>
@@ -145,7 +145,7 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" class="btn btn-secondary" abpClose>
+    <button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -153,7 +153,7 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
-    <div style="color: purple;margin-left: 5px;" class="fas fa-sitemap fa-2x"></div>
+    <div style="color:purple; margin-left: 5px;" class="fas fa-sitemap fa-2x"></div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -161,7 +161,7 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" class="btn btn-secondary" abpClose>
+    <button type="button" style="background-color: purple; color: white;" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -177,7 +177,7 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" class="btn btn-secondary" abpClose>
+    <button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
