@@ -95,19 +95,19 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'Exception'" prop="line.prop" [width]="10">
+      <ngx-datatable-column [sortable]="false" [name]="'Exception'" prop="line.prop" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <button mat-raised-button *ngIf="row.exceptions != null" style="color: white; background-color: purple;"
             (click)="exceptions(row.exceptions)" class="fas fa-exclamation"></button>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'Actions'" prop="line.prop" [width]="10">
+      <ngx-datatable-column [sortable]="false" [name]="'Actions'" prop="line.prop" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-sitemap"
             (click)="actions(row.id)"></button>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'Details'" prop="line.prop" [width]="10">
+      <ngx-datatable-column [sortable]="false" [name]="'Details'" prop="line.prop" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-search"
             (click)="details(row)"></button>

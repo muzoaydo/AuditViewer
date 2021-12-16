@@ -77,7 +77,7 @@ namespace AuditViewer.AuditLogs
             var queryable = await _auditLogFilterRepository.GetQueryableAsync();
             var list = queryable.Where(x => (!input.UserName.IsNullOrWhiteSpace() ? x.UserName.Contains(input.UserName) : true)
                 && (!input.ClientIpAddress.IsNullOrWhiteSpace() ? x.ClientIpAddress.Contains(input.ClientIpAddress) : true)
-                && (!input.Url.IsNullOrWhiteSpace() ? x.Url.Contains(input.Url) : true)
+                && (!input.Url.IsNullOrWhiteSpace() ? (x.Url.Contains(input.Url) ) : true)
                 && (!input.HttpMethod.IsNullOrWhiteSpace() ? x.HttpMethod.Contains(input.HttpMethod) : true)
                 && (input.HttpStatusCode.HasValue ? (x.HttpStatusCode == input.HttpStatusCode) : true)
                 && (input.HasExceptions == "YES" ? x.Exceptions != null : true)
