@@ -1,13 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuditLogDto, AuditLogService } from '@proxy/audit-logs';
 import { GetAuditLogActionListDto } from '@proxy/audit-log-actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auditlog',
   templateUrl: './auditlog.component.html',
   styleUrls: ['./auditlog.component.scss'],
   providers: [ListService],
+  encapsulation: ViewEncapsulation.None
 })
 export class AuditlogComponent implements OnInit {
 
@@ -19,20 +21,16 @@ export class AuditlogComponent implements OnInit {
   selectedException = "";
   selectedLogId: string;
   selectedLog: object;
-  // userName: string;
-  // httpStatusCode: number;
-  // clientIpAddress: string;
-  // url: string;
-  // httpMethod: string;
-  // hasException: string;
+
   user: string = "";
   stat: number;
-  ip:string;
-  urlVal:string;
-  method:string;
-  exc:string;
+  ip: string;
+  urlVal: string;
+  method: string;
+  exc: string;
+  isRegexVal: boolean
 
-
+  subscription: Subscription;
 
   auditArr = [
     { label: "User", value: "userName", name: "::userName", prop: "userName", width: 30 },
@@ -49,14 +47,8 @@ export class AuditlogComponent implements OnInit {
 
     this.list.hookToQuery(auditLogStreamCreator).subscribe((response) => {
       this.auditLogs = response
-
-      for (let i = 0; i < this.auditLogs.items.length; i++) {
-        let item = this.auditLogs.items[i];
-        if (item["exceptions"]) {
-          item["exceptions"] = JSON.stringify(JSON.parse(item["exceptions"]), null, 2).replace(/(\\r\\n)/gm, '');
-
-        }
-      }
+      debugger
+      this.parsing("exceptions");
     }
     )
   };
@@ -85,7 +77,6 @@ export class AuditlogComponent implements OnInit {
   }
 
   clear() {
-    debugger;
     this.user = ""
     this.stat = null
     this.ip = ""
@@ -94,12 +85,27 @@ export class AuditlogComponent implements OnInit {
     this.exc = ""
   }
 
-  filter(userName: string,
-    httpStatusCode: number,
-    clientIpAddress: string,
-    url: string,
-    httpMethod: string,
-    hasExceptions: string) {
+  parsing(fieldName: string) {
+    for (let i = 0; i < this.auditLogs.items.length; i++) {
+      let item = this.auditLogs.items[i];
+      if (item[fieldName]) {
+        item[fieldName] = JSON.stringify(JSON.parse(item[fieldName]), null, 2).replace(/(\\r\\n)/gm, '\r\n');
+      }
+    }
+  }
+
+  filter( userName: string,
+          httpStatusCode: number,
+          clientIpAddress: string,
+          url: string,
+          httpMethod: string,
+          hasExceptions: string,
+          isRegex: boolean) {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.list.page = 0;
 
     const auditLogStreamCreator2 = (query) => this.auditLogService.getFilteredList(
       {
@@ -109,22 +115,14 @@ export class AuditlogComponent implements OnInit {
         httpStatusCode: httpStatusCode,
         url: url,
         httpMethod: httpMethod,
-        hasExceptions: hasExceptions
+        hasExceptions: hasExceptions,
+        isRegex: isRegex
       });
-    debugger
 
-    this.list.hookToQuery(auditLogStreamCreator2).subscribe((response) => {
+    this.subscription = this.list.hookToQuery(auditLogStreamCreator2).subscribe((response) => {
       this.auditLogs = response
-      debugger
 
-
-      for (let i = 0; i < this.auditLogs.items.length; i++) {
-        let item = this.auditLogs.items[i];
-        if (item["exceptions"]) {
-          item["exceptions"] = JSON.stringify(JSON.parse(item["exceptions"]), null, 2).replace(/(\\r\\n|\r|\n)/gm, '');
-
-        }
-      }
+      this.parsing("exceptions");
     }
     )
   };
