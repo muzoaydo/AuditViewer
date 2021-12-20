@@ -21,7 +21,7 @@ export class AuditLogService {
     this.restService.request<any, PagedResultDto<AuditLogDto>>({
       method: 'GET',
       url: '/api/app/audit-log/filtered-list',
-      params: { userName: input.userName, clientIpAddress: input.clientIpAddress, url: input.url, httpMethod: input.httpMethod, httpStatusCode: input.httpStatusCode, hasExceptions: input.hasExceptions, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { userName: input.userName, clientIpAddress: input.clientIpAddress, url: input.url, httpMethod: input.httpMethod, httpStatusCode: input.httpStatusCode, hasExceptions: input.hasExceptions, isRegex: input.isRegex, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
 

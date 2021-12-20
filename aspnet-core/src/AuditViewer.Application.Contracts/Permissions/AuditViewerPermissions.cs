@@ -6,5 +6,11 @@
 
         //Add your own permission names. Example:
         //public const string MyPermission1 = GroupName + ".MyPermission1";
+
+        public static class AuditLogs
+        {
+            public const string Default = GroupName + ".AuditLogs";
+
+        }
     }
 }

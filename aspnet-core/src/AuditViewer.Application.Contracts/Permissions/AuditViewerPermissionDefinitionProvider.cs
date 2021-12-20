@@ -8,9 +8,10 @@ namespace AuditViewer.Permissions
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var myGroup = context.AddGroup(AuditViewerPermissions.GroupName);
+            var auditViewerGroup = context.AddGroup(AuditViewerPermissions.GroupName);
             //Define your own permissions here. Example:
             //myGroup.AddPermission(AuditViewerPermissions.MyPermission1, L("Permission:MyPermission1"));
+            var auditViewerPermission = auditViewerGroup.AddPermission(AuditViewerPermissions.AuditLogs.Default, L("Permission:AuditLogs"));
         }
 
         private static LocalizableString L(string name)

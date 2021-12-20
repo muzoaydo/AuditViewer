@@ -7,4 +7,5 @@ export interface FilterDto extends PagedAndSortedResultRequestDto {
   httpMethod?: string;
   httpStatusCode?: number;
   hasExceptions?: string;
+  isRegex?: string;
 }

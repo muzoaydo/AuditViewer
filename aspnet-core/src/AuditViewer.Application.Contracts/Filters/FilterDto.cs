@@ -22,5 +22,7 @@ namespace AuditViewer.Filters
         public int? HttpStatusCode { get; set; }
 
         public string HasExceptions { get; set; }
+
+        public bool IsRegex { get; set; }
     }
 }

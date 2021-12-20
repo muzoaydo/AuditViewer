@@ -27,7 +27,8 @@ function configureRoutes(routesService: RoutesService) {
         name: '::Menu:AuditLogs',
         iconClass: 'fas fa-align-justify',
         parentName: '::Menu:AuditViewer',
-        layout: eLayoutType.application
+        layout: eLayoutType.application,
+        requiredPolicy: 'AuditViewer.AuditLogs'
       }
     ]);
   };

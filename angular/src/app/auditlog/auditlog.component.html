@@ -24,42 +24,60 @@
           <mat-label>Ip Address</mat-label>
           <input matInput #clientIpAddress [(ngModel)]="ip" name="ip">
         </mat-form-field>
-        <div style="align-self: center;">
-        <mat-form-field style="   width: 155px;">
-          <mat-label>HTTP Method</mat-label>
-          <mat-select disableOptionCentering #httpMethod [(ngModel)]="method" name="method">
-            <mat-option value="GET">GET</mat-option>
-            <mat-option value="POST">POST</mat-option>
-            <mat-option value="PUT">PUT</mat-option>
-            <mat-option value="DELETE">DELETE</mat-option>
-            <mat-option value="PATCH">PATCH</mat-option>
-            <mat-option value="ANY">ANY</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field style="width: 155px; margin-left:10px; margin-right: 10px;">
-          <mat-label>Has Exception ?</mat-label>
-          <mat-select #hasExceptions [(ngModel)]="exc" name="exc">
-            <mat-option value="YES">Yes</mat-option>
-            <mat-option value="NO">No</mat-option>
-            <mat-option value="ANY">Any</mat-option>
-          </mat-select>
-        </mat-form-field>
-        
-          <mat-form-field style="width: 700px;" class="filter-input" appearance="fill">
-            <mat-label>URL</mat-label>
-            <input #url matInput [(ngModel)]="urlVal" name="urlVal">
-          </mat-form-field>
+        <div class="row">
+          <div class="column" style="align-self: center; margin-left: 20px;">
+            <mat-form-field style="   width: 155px;">
+              <mat-label>HTTP Method</mat-label>
+              <mat-select disableOptionCentering #httpMethod [(ngModel)]="method" name="method">
+                <mat-option value="GET">GET</mat-option>
+                <mat-option value="POST">POST</mat-option>
+                <mat-option value="PUT">PUT</mat-option>
+                <mat-option value="DELETE">DELETE</mat-option>
+                <mat-option value="PATCH">PATCH</mat-option>
+                <mat-option value="ANY">ANY</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width: 155px; margin-left:10px; margin-right: 10px;">
+              <mat-label>Has Exception ?</mat-label>
+              <mat-select #hasExceptions [(ngModel)]="exc" name="exc">
+                <mat-option value="YES">Yes</mat-option>
+                <mat-option value="NO">No</mat-option>
+                <mat-option value="ANY">Any</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="column" style="align-self: center;">
+            <mat-form-field style="width: 600px;" class="filter-input" appearance="fill">
+              <mat-label>URL</mat-label>
+              <input #url matInput [(ngModel)]="urlVal" name="urlVal">
+
+            </mat-form-field>
+          </div>
+          <!-- Rounded switch -->
+          <div class="column" style="margin-left: 20px;">
+            <div class="row">
+              <label style="font-size: small;">Is Regex ?</label>
+            </div>
+            <div class="row">
+              <label class="switch">
+                <input name="isRegexVal" id="isRegex" #isRegex type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
         </div>
         <div>
-          <button mat-raised-button style="margin-right: 30px; background-color: purple; color: white; width: 500px;" (click)="filter(
-                                                                                                  userName.value,
-                                                                                                  httpStatusCode.value,
-                                                                                                  clientIpAddress.value,
-                                                                                                  url.value,
-                                                                                                  httpMethod.value,
-                                                                                                  hasExceptions.value)"
-          >Filter</button>
-          <button mat-raised-button style="background-color: purple; color: white; width: 500px; " (click)="clear()" >Clear</button>
+          <button mat-raised-button style="margin-right: 30px; background-color: purple; color: white; width: 500px;"
+            (click)="filter(userName.value,
+                            httpStatusCode.value,
+                            clientIpAddress.value,
+                            url.value,
+                            httpMethod.value,
+                            hasExceptions.value,
+                            isRegex.checked)">Filter
+          </button>
+          <button mat-raised-button style="background-color: purple; color: white; width: 500px; "
+            (click)="clear()">Clear</button>
         </div>
       </div>
     </form>
@@ -117,35 +135,20 @@
   </div>
 </div>
 
+
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isExceptionsOpen">
   <ng-template #abpHeader>
-    <div style="color: purple;margin-left: 5px;" class="fas fa-exclamation fa-2x"></div>
+    <div  class="fas fa-exclamation fa-2x"> Exceptions</div>
   </ng-template>
 
   <ng-template #abpBody>
-    <!-- <div style="font-size: small; font-weight: 500; padding: 10px;">
-      {{ selectedException }} -->
-
-      <div style=" color: white; background-color: purple;" class="card-header">
-        <div class="row">
-            <div class="col col-md-6">
-                <h5 class="card-title">
-                    {{ 'Exceptions' | abpLocalization }}
-                </h5>
-            </div>
-            <div class="text-right col col-md-6"></div>
-        </div>
-    </div>
-    <div
-        style="background-color: #efefef; padding:10px; border: 1px; border-style: solid; border-color: purple; border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;">
-            <div style="margin-bottom: 5px;font-weight: 500; font-size: medium; color: black;">
-              {{ selectedException }}
-        </div>
+    <div>
+      <pre style="margin-bottom: 5px;font-weight: 500; font-size: small; color: black;">{{ selectedException }}</pre>
     </div>
   </ng-template>
 
   <ng-template #abpFooter>
-    <button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
+    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -153,7 +156,7 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
-    <div style="color:purple; margin-left: 5px;" class="fas fa-sitemap fa-2x"></div>
+    <div  class="fas fa-sitemap fa-2x"> Audit Log Actions</div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -161,7 +164,7 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" style="background-color: purple; color: white;" class="btn btn-secondary" abpClose>
+    <button mat-raised-button type="button" style="background-color: purple; color: white;" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -169,7 +172,7 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isDetailsOpen">
   <ng-template #abpHeader>
-    <div style="color: purple; margin-left: 5px;" class="fas fa-search fa-2x"></div>
+    <div class="fas fa-search fa-2x"> Log Details</div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -177,7 +180,7 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
+    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
