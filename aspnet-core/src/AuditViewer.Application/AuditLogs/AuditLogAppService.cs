@@ -28,22 +28,6 @@ namespace AuditViewer.AuditLogs
         private readonly IRepository<AuditLog, Guid> _auditLogFilterRepository;
 
 
-        //private Func<AuditLog, bool> filtering(FilterDto input, AuditLog x)
-        //{
-
-
-        //    x => (!input.UserName.IsNullOrWhiteSpace() ? x.UserName.Contains(input.UserName) : true)
-        //        && (!input.ClientIpAddress.IsNullOrWhiteSpace() ? x.ClientIpAddress.Contains(input.ClientIpAddress) : true)
-        //        && (!input.Url.IsNullOrWhiteSpace() ? x.Url.Contains(input.Url) : true)
-        //        && (!input.HttpMethod.IsNullOrWhiteSpace() ? x.HttpMethod.Contains(input.HttpMethod) : true)
-        //        && (input.HttpStatusCode.HasValue ? (x.HttpStatusCode == input.HttpStatusCode) : true)
-        //        && (input.HasExceptions == "YES" ? x.Exceptions != null : true)
-        //        && (input.HasExceptions == "NO" ? x.Exceptions == null : true)
-
-        //        return x
-        //}
-
-
         public AuditLogAppService(IRepository<AuditLog, Guid> auditLogFilterRepository)
             : base(auditLogFilterRepository)
         {
@@ -58,7 +42,7 @@ namespace AuditViewer.AuditLogs
 
             if (input.Sorting == null)
             {
-                input.Sorting = "executionTime desc";
+                input.Sorting = "executionTime asc";
             }
 
             var totalCount = await _auditLogFilterRepository.CountAsync(
@@ -82,7 +66,7 @@ namespace AuditViewer.AuditLogs
                 && (input.HasExceptions == "YES" ? x.Exceptions != null : true)
                 && (input.HasExceptions == "NO" ? x.Exceptions == null : true))
                 .OrderBy(input.Sorting)
-                .ThenBy("executionTime desc")
+                .ThenBy("executionTime asc")
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount)
                 .ToList();

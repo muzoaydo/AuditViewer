@@ -13,11 +13,11 @@ namespace AuditViewer.AuditLogActions
 {
     public class AuditLogActionAppService :
         ReadOnlyAppService<
-            AuditLogAction, //The Book entity
-            AuditLogActionDto, //Used to show books
-            Guid, //Primary key of the book entity
-            PagedAndSortedResultRequestDto>, //Used for paging/sorting
-        IAuditLogActionAppService //implement the IBookAppService
+            AuditLogAction, 
+            AuditLogActionDto,
+            Guid, 
+            PagedAndSortedResultRequestDto>, 
+        IAuditLogActionAppService 
     {
         private readonly IAuditLogActionRepository _auditLogActionrepository;
 

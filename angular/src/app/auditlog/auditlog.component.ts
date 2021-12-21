@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuditLogDto, AuditLogService } from '@proxy/audit-logs';
-import { GetAuditLogActionListDto } from '@proxy/audit-log-actions';
 import { Subscription } from 'rxjs';
 
 @Component({
