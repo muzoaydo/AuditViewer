@@ -61,28 +61,6 @@ namespace AuditViewer.AuditLogs
                 input.Sorting = "executionTime desc";
             }
 
-            //if (input.IsRegex == "on")
-            //{
-            //    Regex rgx = new Regex("@"{$input.Url}");
-            //}
-
-
-
-            //Regex rgx = new Regex("");
-
-            //if (!input.Url.IsNullOrWhiteSpace() || input.IsRegex == "on")
-            //{
-            //    rgx = new Regex(input.Url);
-            //}
-            
-
-
-            //foreach (string partNumber in partNumbers) { 
-            //     var a = rgx.IsMatch(partNumber);
-            //}
-
-
-            //var x = rgx.IsMatch("1298-673-4192");
             var totalCount = await _auditLogFilterRepository.CountAsync(
                 x => (!input.UserName.IsNullOrWhiteSpace() ? x.UserName.Contains(input.UserName) : true)
                 && (!input.ClientIpAddress.IsNullOrWhiteSpace() ? x.ClientIpAddress.Contains(input.ClientIpAddress) : true)

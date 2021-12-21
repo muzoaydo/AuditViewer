@@ -10,7 +10,73 @@
     </div>
   </div>
   <div class="card-body">
-    <form #myForm>
+    <div class="row">
+      <div class="input-group mb-3 col col-md-4">
+        <input #httpStatusCode [(ngModel)]="stat" name="stat" type="text" class="form-control" placeholder="Status Code"
+          aria-label="" aria-describedby="httpStatusCode">
+      </div>
+
+      <div class="input-group mb-3 col col-md-4">
+        <input #userName name="user" matInput [(ngModel)]="user" type="text" class="form-control"
+          placeholder="User Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      </div>
+
+      <div class="input-group mb-3 col col-md-4">
+        <input matInput #clientIpAddress [(ngModel)]="ip" name="ip" type="text" class="form-control" placeholder="IP Address"
+          aria-label="IP Address" aria-describedby="basic-addon3">
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="input-group mb-3 col col-md-8">
+        <div class="input-group-prepend">
+          <div class="input-group-text" style=" background-color: purple;">
+            <mat-slide-toggle name="isRegexVal" id="isRegex" #isRegex  style="color: white;">Regex</mat-slide-toggle>
+          </div>
+        </div>
+        <input #url  [(ngModel)]="urlVal" name="urlVal" type="text" class="form-control" aria-label="Text input with checkbox" placeholder="URL">
+      </div>
+
+      <div class="input-group mb-3 col col-md-2">
+        <select #httpMethod [(ngModel)]="method" name="method" class="custom-select" id="httpMethod">
+          <option value="" hidden selected>HTTP Method</option>
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+          <option value="PATCH">PATCH</option>
+          <option value="ANY">ANY</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3 col col-md-2">
+        <select #hasExceptions [(ngModel)]="exc" name="exc" class="custom-select" id="hasExceptions">
+          <option value="" hidden selected>Has Exception ?</option>
+          <option value="YES">Yes</option>
+          <option value="NO">No</option>
+          <option value="ANY">ANY</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <button class="" mat-raised-button style="background-color: purple; color: white; margin-left: 15px; margin-right: 15px; width: 527px;"
+        (click)="filter(userName.value,
+                        httpStatusCode.value,
+                        clientIpAddress.value,
+                        url.value,
+                        httpMethod.value,
+                        hasExceptions.value,
+                        isRegex.checked)">Filter
+      </button>
+      <button class="" mat-raised-button style="background-color: purple; color: white; width: 527px;"
+        (click)="clear()">Clear</button>
+    </div>
+  </div>
+
+  <!-- <form #myForm>
       <div style="margin-left:25px">
         <mat-form-field style="  width: 320px;" class="filter-input" appearance="fill">
           <mat-label>HTTP Status Code</mat-label>
@@ -53,7 +119,7 @@
 
             </mat-form-field>
           </div>
-          <!-- Rounded switch -->
+          
           <div class="column" style="margin-left: 20px;">
             <div class="row">
               <label style="font-size: small;">Is Regex ?</label>
@@ -80,10 +146,9 @@
             (click)="clear()">Clear</button>
         </div>
       </div>
-    </form>
-  </div>
-  <hr>
-  <!-- <div class="card">
+    </form> -->
+
+<!-- <div class="card">
   <div style="color: white; background-color: purple;" class="card-header">
     <div class="row">
       <div class="col col-md-6">
@@ -94,61 +159,63 @@
       <div class="text-right col col-md-6"></div>
     </div>
   </div> -->
-  <div class="card-body">
-    <ngx-datatable [rows]="auditLogs.items" [count]="auditLogs.totalCount" [list]="list" default>
-      <ngx-datatable-column [name]="'HTTP Request'" prop="httpStatusCode" [width]="200">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row.httpStatusCode }} {{ row.httpMethod}} {{ row.url }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column *ngFor="let line of auditArr" [name]="line.name | abpLocalization" [prop]="line.prop"
-        [width]="line.width">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <div style="white-space: pre-wrap;" *ngIf="line.label == 'Execution Time'">
-            {{ row[line.value] | date }}
-            {{ row[line.value] | date: "HH:mm:ss" }}
-          </div>
-          <div *ngIf="line.label != ('Execution Time' || 'httpStatusCode' || 'httpMethod')" [prop]="line.prop">
-            {{ row[line.value] || '-'}}
-          </div>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [sortable]="false" [name]="'Exception'" prop="line.prop" [width]="10">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button mat-raised-button *ngIf="row.exceptions != null" style="color: white; background-color: purple;"
-            (click)="exceptions(row.exceptions)" class="fas fa-exclamation"></button>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [sortable]="false" [name]="'Actions'" prop="line.prop" [width]="10">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-sitemap"
-            (click)="actions(row.id)"></button>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [sortable]="false" [name]="'Details'" prop="line.prop" [width]="10">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-search"
-            (click)="details(row)"></button>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
-  </div>
+<div class="card-body">
+  <ngx-datatable [rows]="auditLogs.items" [count]="auditLogs.totalCount" [list]="list" default>
+    <ngx-datatable-column [name]="'HTTP Request'" prop="httpStatusCode" [width]="200">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.httpStatusCode }} {{ row.httpMethod}} {{ row.url }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngFor="let line of auditArr" [name]="line.name | abpLocalization" [prop]="line.prop"
+      [width]="line.width">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div style="white-space: pre-wrap;" *ngIf="line.label == 'Execution Time'">
+          {{ row[line.value] | date }}
+          {{ row[line.value] | date: "HH:mm:ss" }}
+        </div>
+        <div *ngIf="line.label != ('Execution Time' || 'httpStatusCode' || 'httpMethod')" [prop]="line.prop">
+          {{ row[line.value] || '-'}}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [sortable]="false" [name]="'Exception'" prop="line.prop" [width]="10">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-raised-button *ngIf="row.exceptions != null" style="color: white; background-color: purple;"
+          (click)="exceptions(row.exceptions)" class="fas fa-exclamation"></button>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [sortable]="false" [name]="'Actions'" prop="line.prop" [width]="10">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-sitemap"
+          (click)="actions(row.id)"></button>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [sortable]="false" [name]="'Details'" prop="line.prop" [width]="10">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-raised-button style="color: white; background-color: purple;" class="fas fa-search"
+          (click)="details(row)"></button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
 </div>
 
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isExceptionsOpen">
   <ng-template #abpHeader>
-    <div  class="fas fa-exclamation fa-2x"> Exceptions</div>
+    <div class="fas fa-exclamation fa-2x"> Exceptions</div>
   </ng-template>
 
   <ng-template #abpBody>
     <div>
-      <pre style="margin-bottom: 5px;font-weight: 500; font-size: small; color: black;">{{ selectedException }}</pre>
+      <pre
+        style="overflow: visible; margin-bottom: 5px;font-weight: 500; font-size: small; color: black;">{{ selectedException }}</pre>
     </div>
   </ng-template>
 
   <ng-template #abpFooter>
-    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
+    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary"
+      abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -156,7 +223,7 @@
 
 <abp-modal [options]="{size: 'xl'}" [(visible)]="isActionsOpen">
   <ng-template #abpHeader>
-    <div  class="fas fa-sitemap fa-2x"> Audit Log Actions</div>
+    <div class="fas fa-sitemap fa-2x"> Audit Log Actions</div>
   </ng-template>
 
   <ng-template #abpBody>
@@ -164,7 +231,8 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button mat-raised-button type="button" style="background-color: purple; color: white;" class="btn btn-secondary" abpClose>
+    <button mat-raised-button type="button" style="background-color: purple; color: white;" class="btn btn-secondary"
+      abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>
@@ -180,7 +248,8 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary" abpClose>
+    <button mat-raised-button style="background-color: purple; color: white;" type="button" class="btn btn-secondary"
+      abpClose>
       {{ '::Close' | abpLocalization }}
     </button>
   </ng-template>

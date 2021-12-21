@@ -22,12 +22,12 @@ export class AuditlogComponent implements OnInit {
   selectedLogId: string;
   selectedLog: object;
 
-  user: string = "";
+  user: string;
   stat: number;
   ip: string;
   urlVal: string;
-  method: string;
-  exc: string;
+  method: string = "";
+  exc: string = "";
   isRegexVal: boolean
 
   subscription: Subscription;
@@ -47,7 +47,6 @@ export class AuditlogComponent implements OnInit {
 
     this.list.hookToQuery(auditLogStreamCreator).subscribe((response) => {
       this.auditLogs = response
-      debugger
       this.parsing("exceptions");
     }
     )
