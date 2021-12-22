@@ -9,13 +9,10 @@ namespace AuditViewer.Filters
     {
 
 
-        //[StringLength(AuditLogSharedConsts.UserNameMaxLength)]
         public string UserName { get; set; }
 
-        //[StringLength(AuditLogSharedConsts.ClientIpAddressMaxLength)]
         public string ClientIpAddress { get; set; }
 
-        //[StringLength(AuditLogSharedConsts.UrlMaxLength)]
         public string Url { get; set; }
         public string HttpMethod { get; set; }
 

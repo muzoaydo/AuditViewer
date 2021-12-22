@@ -39,12 +39,10 @@ export class AuditLogActionsComponent implements OnInit {
         let fieldName = jsonFields[i];
         for (let j=0; j < this.auditLogActions.items.length; j++) {
           let item = this.auditLogActions.items[j];
-          debugger
           if (item[fieldName]) {
             item[fieldName] = JSON.stringify(JSON.parse(item[fieldName]), null, 2)
           }
         }
-        
       }
     });
   }

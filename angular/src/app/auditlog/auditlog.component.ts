@@ -34,7 +34,7 @@ export class AuditlogComponent implements OnInit {
   auditArr = [
     { label: "User", value: "userName", name: "::userName", prop: "userName", width: 30 },
     { label: "Ip Address", value: "clientIpAddress", name: "::clientIpAddress", prop: "clientIpAddress", width: 50 },
-    { label: "Execution Time", value: "executionTime", name: "::executionTime", prop: "executionTime", width: 50 },
+    { label: "Execution Time", value: "executionTime", name: "::executionTime", prop: "executionTime", width: 100 },
     { label: "Duration", value: "executionDuration", name: "::executionDuration", prop: "executionDuration", width: 10 }
   ]
 
@@ -66,7 +66,6 @@ export class AuditlogComponent implements OnInit {
   details(row) {
     this.isDetailsOpen = true;
     this.selectedLog = row;
-    debugger
   }
 
   actions(logId: string) {
