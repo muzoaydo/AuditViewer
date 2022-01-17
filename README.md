@@ -12,3 +12,6 @@ Once you have the AbpAuditLogs and AbpAuditLogActions table in your DB it should
 This code is configured to use PostgreSQL but it can be changed by a couple configurations.
 Refer to the ABP website for further instructions.
 https://docs.abp.io/en/abp/4.4/Entity-Framework-Core-Other-DBMS
+
+
+![AuditViewer](https://user-images.githubusercontent.com/64156908/149792115-6bb5d71b-b6fa-448e-b659-289dfa57fff5.gif)
